@@ -1,3 +1,5 @@
+[![CMake](https://github.com/tadeuszk733/PI_solutions/actions/workflows/cmake.yml/badge.svg?branch=master)](https://github.com/tadeuszk733/PI_solutions/actions/workflows/cmake.yml)
+
 # Solutions to Imperative Programming
 ## Features
 - Auto-generate test cases
