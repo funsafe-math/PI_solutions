@@ -51,6 +51,8 @@ def main():
 
     text = os.popen(f"pdfgrep . '{filename}'").read()
     cases = extract_case_text(text)
+    if len(cases) == 0:
+        print("Found no cases")
     for i, p in enumerate(cases):
         a, b = p
         generate_testcase(name, i, a, b)
