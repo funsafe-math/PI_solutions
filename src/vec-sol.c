@@ -1,7 +1,3 @@
-#include <math.h>
-#include <stdio.h>
-#define N 100
-
 #include "vec-template.c"
 
 // generates the n-element sequence by incrementing the start value
