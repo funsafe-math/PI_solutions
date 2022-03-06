@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.20.0)
 project(programowanie_imperatywne VERSION 0.1.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
+if ( CMAKE_COMPILER_IS_GNUCC )
+    set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
+    set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -Wextra -Wpedantic")
+endif()
 
 # Rescan for new tests and executables every compile
 add_custom_target(dummy ALL)
@@ -21,6 +25,7 @@ endforeach()
 
 add_library(tester tester/tester.cpp)
 include_directories(.)
+include_directories(template)
 
 # Tester files
 # include(CTest)
