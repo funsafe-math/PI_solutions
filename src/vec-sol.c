@@ -2,7 +2,7 @@
 
 // generates the n-element sequence by incrementing the start value
 // using the step size
-void range(double v[], int n, double start, double step) {
+void range(double v[], double start, double step, int n) {
   for (int i = 0; i < n; i++) {
     v[i] = start + step * i;
   }
@@ -41,11 +41,4 @@ double dot_product(const double v1[], const double v2[], int n) {
     res += v1[i] * v2[i];
   }
   return res;
-}
-
-// read double vector of size n
-void read_vector(double v[], int n) {
-  for (int i = 0; i < n; i++) {
-    scanf("%lf", v + i);
-  }
 }
