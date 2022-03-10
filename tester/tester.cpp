@@ -24,12 +24,32 @@ void fail(const std::string &correct, const std::string &got) {
 }
 
 void trim(std::string &str) {
-  auto whitespace = " \n\t";
-  auto begin_whitespace = str.find_first_not_of(whitespace);
-  auto end_whitespace = str.find_last_not_of(whitespace);
-  str.erase(end_whitespace + 1);
-  if (begin_whitespace)
-    str.erase(0, begin_whitespace - 1);
+  const char whitespace[] = " \n\t";
+  auto iswhitespace = [&](char c) {
+    for (auto t : whitespace) {
+      if (c == t)
+        return true;
+    }
+    return false;
+  };
+  for (int i = str.length() - 1; i >= 0; i--) {
+    int end = i;
+    int start = i;
+    for (; iswhitespace(str[start]) && start >= 0; start--) {
+      str[start] = ' ';
+    }
+    if (end - start > 1)
+      str.erase(start + 1, end - start - 1);
+    i = start;
+  }
+  if (iswhitespace(str[str.length() - 1])) {
+    str.erase(str.length() - 1);
+  }
+  // auto begin_whitespace = str.find_first_not_of(whitespace);
+  // auto end_whitespace = str.find_last_not_of(whitespace);
+  // str.erase(end_whitespace + 1);
+  // if (begin_whitespace)
+  //   str.erase(0, begin_whitespace - 1);
 }
 
 void open_channel(int &read_fd, int &write_fd) {
@@ -59,6 +79,7 @@ std::string read_string(int read_fd) {
   constexpr int buffer_size = 1000;
   char buffer[buffer_size + 1];
   ssize_t amnt_read;
+  puts(" ");
   fflush(stdout);
   do {
     amnt_read = read(read_fd, &buffer[0], buffer_size);
