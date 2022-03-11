@@ -88,14 +88,14 @@ void rand_permutation(int n, card_type tab[]) {
 }
 
 // Card specific
-int card_power(card_type type) {
-  return type / 4; // will be optimized to (type >> 2) by the compiler
+int card_power(card_type card) {
+  return card / 4; // will be optimized to (card >> 2) by the compiler
 }
 
 enum result { A_wins, B_wins, draw };
 enum result fight(struct cbuf *A, struct cbuf *B, int depth) {
-  card_type a = cbuf_peek(A, depth);
-  card_type b = cbuf_peek(B, depth);
+  int a = card_power(cbuf_peek(A, depth));
+  int b = card_power(cbuf_peek(B, depth));
   if (a > b)
     return A_wins;
   if (a == b)
@@ -110,7 +110,7 @@ void give_cards(struct cbuf *from, struct cbuf *to, int count) {
   }
 }
 
-enum gamemode { normal = 0, simplified = 1 };
+enum gamemode { gamemode_normal = 0, gamemode_simplified = 1 };
 
 /* 0 - game unfinished
  * 1 - not enough cards to finish war
@@ -125,9 +125,13 @@ enum game_result play(struct cbuf *A, struct cbuf *B, int max_moves,
   int cards_on_table = 0;
   //   int moves = 0;
   while (1) {
+    // puts("A : ");
+    // cbuf_print(A);
+    // puts("\nB : ");
+    // cbuf_print(B);
+    // putchar('\n');
     if (++moves > max_moves)
       return out_of_moves;
-
     if (A->len == 0)
       return B_win; // B wins
     if (B->len == 0)
@@ -153,9 +157,9 @@ enum game_result play(struct cbuf *A, struct cbuf *B, int max_moves,
       break;
     }
     case draw: {
-      if (mode == normal) {
+      if (mode == gamemode_normal) {
         cards_on_table += 1; // Put one card face down
-      } else if (mode == simplified) {
+      } else if (mode == gamemode_simplified) {
         give_cards(B, B, cards_on_table);
         give_cards(A, A, cards_on_table);
         cards_on_table = 0;
@@ -172,7 +176,7 @@ int main() {
   srand(seed);
 
   enum gamemode mode;
-  scanf("%d", &mode);
+  scanf("%hd", (short *)&mode);
 
   int max_conflicts;
   scanf("%d", &max_conflicts);
@@ -209,4 +213,5 @@ int main() {
     break;
   }
   }
+  putchar('\n');
 }
