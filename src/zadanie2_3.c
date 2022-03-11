@@ -15,7 +15,6 @@ void swap(card_type *a, card_type *b) {
 }
 
 // Circular buffer stuff
-
 struct cbuf {
   int len;
   int pos;
@@ -125,11 +124,6 @@ enum game_result play(struct cbuf *A, struct cbuf *B, int max_moves,
   int cards_on_table = 0;
   //   int moves = 0;
   while (1) {
-    // puts("A : ");
-    // cbuf_print(A);
-    // puts("\nB : ");
-    // cbuf_print(B);
-    // putchar('\n');
     if (++moves > max_moves)
       return out_of_moves;
     if (A->len == 0)
