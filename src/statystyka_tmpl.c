@@ -42,21 +42,15 @@ void bernoulli_gen(int v[], int bernoulli_prop, int n) {
 // liczba losowań
 
 void probab_distrib(double v[], int trials_num) {
-  const int offset = 2;
-  const int max_score = 12;
-  const int min_score = 2;
-  const int n_scores = max_score - min_score + 1;
   int counts[11] = {
       0,
   };
   for (int i = 0; i < trials_num; i++) {
-    int a = get_rand(1, 6);
-    int b = get_rand(1, 6);
-    counts[a + b - offset]++;
+    int score = rand() % 6 + rand() % 6;
+    counts[score]++;
   }
-  for (int i = 0; i < n_scores; i++) {
+  for (int i = 0; i < 11; i++)
     v[i] = (double)counts[i] * 100 / trials_num;
-  }
 }
 
 // Oblicza i zwraca Dystrybuantę (Cumulative Distribution Function)
