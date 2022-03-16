@@ -16,11 +16,13 @@ add_custom_command(
     COMMAND "${CMAKE_COMMAND}" "${CMAKE_BINARY_DIR}"
 )
 
+
 # Search for solution files
 FILE(GLOB SRC_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} src/*.c*)
 foreach(src ${SRC_FILES})
     get_filename_component(FILENAME_NO_EXTENSION ${src} NAME_WLE )
     add_executable(${FILENAME_NO_EXTENSION} ${src})
+    target_link_libraries(${FILENAME_NO_EXTENSION} PRIVATE m)
 endforeach()
 
 
@@ -36,7 +38,7 @@ FILE(GLOB TESTS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} tests/*.cpp*)
 foreach(src ${TESTS})
     get_filename_component(FILENAME_NO_EXTENSION  ${src} NAME_WLE )
     add_executable(${FILENAME_NO_EXTENSION} ${src})
-    target_link_libraries(${FILENAME_NO_EXTENSION} tester)
+    target_link_libraries(${FILENAME_NO_EXTENSION} tester m)
     add_test(${FILENAME_NO_EXTENSION} ${FILENAME_NO_EXTENSION})
 endforeach()
 
