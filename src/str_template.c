@@ -17,7 +17,7 @@
 #define IN_BLOCK_COMMENT 2
 
 #ifndef TEST
-#define TEST 0 // 1 dla testowania, 0 dla automatycznej oceny
+#define TEST 1 // 1 dla testowania, 0 dla automatycznej oceny
 #endif
 
 int count[MAX_DIGRAMS] = {0};
@@ -109,6 +109,7 @@ void char_count(int char_no, int *n_char, int *cnt, FILE *stream) {
     ixes[i] = i;
   }
   insert_sort(ixes, ARR_LEN(ixes), char_count_predecate, counts);
+  // qsort_r(ixes, ARR_LEN(ixes), sizeof(ixes[0]), cmp, counts);
 
   // Set results
   *n_char = ixes[char_no - 1] + FIRST_CHAR;
@@ -128,36 +129,34 @@ char digram_count_predecate(int a, int b, void *data) {
 // digram[1] to the first and the second char in the digram_no - th digram_char
 // in the sorted list. Set digram[2] to its cardinality.
 void digram_count(int digram_no, int digram[], FILE *stream) {
-  const int char_n = LAST_CHAR - FIRST_CHAR;
-  int digram_count_n = char_n * char_n;
-
-  // 4*8kB is a lot to put on a stack
-  int *digram_count = (int *)calloc(digram_count_n, sizeof(int));
-
   int previous = fgetc(stream);
   int c;
   while ((c = fgetc(stream)) != EOF) {
-    if (c >= LAST_CHAR || c < FIRST_CHAR)
+    if (c < FIRST_CHAR || c >= LAST_CHAR || previous < FIRST_CHAR ||
+        previous >= LAST_CHAR) {
+      previous = c;
       continue;
-    c -= FIRST_CHAR;
-    digram_count[previous * char_n + c]++;
+    }
+    count[(previous - FIRST_CHAR) * MAX_CHARS + c - FIRST_CHAR]++;
     previous = c;
   }
 
-  int *ixes = (int *)malloc(digram_count_n * sizeof(int));
-  for (int i = 0; i < digram_count_n; i++) {
+  // 4*8kB is a lot to put on a stack
+  int *ixes = (int *)malloc(MAX_DIGRAMS * sizeof(int));
+  for (int i = 0; i < MAX_DIGRAMS; i++) {
     ixes[i] = i;
   }
 
-  insert_sort(ixes, digram_count_n, digram_count_predecate, digram_count);
+  // insert_sort(ixes, MAX_DIGRAMS, digram_count_predecate, digram_count);
+  // qsort_r(ixes, ARR_LEN(ixes), sizeof(ixes[0]), cmp_di, digram_count);
+  qsort(ixes, MAX_DIGRAMS, sizeof(int), cmp_di);
 
   // Set results
-  digram[0] = (ixes[digram_no - 1] / char_n) + FIRST_CHAR;
-  digram[1] = (ixes[digram_no - 1] % char_n) + FIRST_CHAR;
-  digram[2] = digram_count[ixes[digram_no - 1]];
+  digram[0] = (ixes[digram_no - 1] / MAX_CHARS) + FIRST_CHAR;
+  digram[1] = (ixes[digram_no - 1] % MAX_CHARS) + FIRST_CHAR;
+  digram[2] = count[ixes[digram_no - 1]];
 
   // The Lord giveth, and the Lord taketh away
-  free(digram_count);
   free(ixes);
 }
 
@@ -171,26 +170,35 @@ void find_comments(int *line_comment_counter, int *block_comment_counter,
                    FILE *stream) {
   *line_comment_counter = 0;
   *block_comment_counter = 0;
-  const int IN_BLOCK = 1 << 0;
-  const int IN_LINE = 1 << 1;
   int comment_style = 0;
   int chars[2];
   chars[0] = fgetc(stream);
   while ((chars[1] = fgetc(stream)) != EOF) {
-    if (comment_style == IN_BLOCK) {
-      if (equal_digrams(chars, "*/"))
+    switch (comment_style) {
+    case IN_BLOCK_COMMENT: {
+      if (equal_digrams(chars, "*/")) {
         comment_style = 0;
-    } else if (comment_style == IN_LINE) {
-      if (chars[1] == '\n')
-        comment_style = 0;
-    } else {
-      if (equal_digrams(chars, "//")) {
-        comment_style = IN_LINE;
-        (*line_comment_counter)++;
-      } else if (equal_digrams(chars, "/*")) {
-        comment_style = IN_BLOCK;
-        (*block_comment_counter)++;
+        chars[1] = fgetc(stream);
       }
+      break;
+    }
+    case IN_LINE_COMMENT: {
+      if (chars[1] == '\n') {
+        comment_style = 0;
+      }
+      break;
+    }
+    default: {
+      if (equal_digrams(chars, "//")) {
+        comment_style = IN_LINE_COMMENT;
+        (*line_comment_counter)++;
+        chars[1] = fgetc(stream);
+      } else if (equal_digrams(chars, "/*")) {
+        comment_style = IN_BLOCK_COMMENT;
+        (*block_comment_counter)++;
+        chars[1] = fgetc(stream);
+      }
+    }
     }
     chars[0] = chars[1];
   }
