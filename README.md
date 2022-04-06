@@ -3,7 +3,7 @@
 
 # Solutions to Imperative Programming
 ## Features
-- Auto-generate test cases
+- Auto-generate test cases (currently suspended)
 - Test cases can be run in debugger
 
 ## Example usage:
