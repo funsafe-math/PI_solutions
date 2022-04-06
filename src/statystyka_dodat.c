@@ -169,7 +169,7 @@ void print_bern_vector(int bern_v[], int n) {
 }
 
 int main(void) {
-  int to_do, len, seed, propabl, number, m_h_wins, non_m_h_wins, itab[100];
+  int to_do, len, seed, propabl, m_h_wins, non_m_h_wins, itab[100];
   double arith_aver, varian, m_h_probabil, non_m_h_probabil, dtab[100];
   if (TEST)
     printf("Wpisz numer testu [1, 5]: ");

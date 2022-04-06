@@ -35,7 +35,7 @@ double int_rightrect(double x1, double x2, int n, double (*func)(double)) {
 
 double int_midrect(double x1, double x2, int n, double (*func)(double)) {
   double dx = (x2 - x1) / n;
-  double sum = 0.0, x;
+  double sum = 0.0;
   for (int i = 0; i < n; i++) {
     sum += func(gen_x(x1, x2, n, i) + dx / 2);
   }
@@ -61,7 +61,7 @@ double double_integr(double x1, double x2, int nx, double y1, double y2, int ny,
   double dx = (x2 - x1) / nx;
   double dy = (y2 - y1) / ny;
 
-  double sum = 0.0, x, y;
+  double sum = 0.0;
 
   for (int y = 0; y < ny; y++) {
     for (int x = 0; x < nx; x++) {

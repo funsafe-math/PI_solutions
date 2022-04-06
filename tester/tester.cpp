@@ -68,7 +68,7 @@ void open_channel(int &read_fd, int &write_fd) {
 void write_string(int write_fd, const std::string_view &message) {
   //   std::cerr << message; // Emulate actually writing to console
   ssize_t n_written = write(write_fd, message.data(), message.size());
-  if (n_written != message.size()) {
+  if (n_written != static_cast<ssize_t>(message.size())) {
     throw std::runtime_error("Error writing to stdin");
   }
   close(write_fd);

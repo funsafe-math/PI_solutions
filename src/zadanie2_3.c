@@ -176,7 +176,7 @@ int main() {
   scanf("%d", &max_conflicts);
 
   card_type deque[N_CARDS];
-  for (int i = 0; i < ARR_LEN(deque); i++) {
+  for (uint i = 0; i < ARR_LEN(deque); i++) {
     deque[i] = i;
   }
   // Shuffle cards

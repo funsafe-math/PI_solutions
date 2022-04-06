@@ -113,7 +113,7 @@ void cbuff_state(void) {
 }
 
 int main(void) {
-  int to_do, i, n, ans;
+  int to_do, n, ans;
   int nr_klienta, kod_operacji;
   double x, f_ans;
   if (TEST)

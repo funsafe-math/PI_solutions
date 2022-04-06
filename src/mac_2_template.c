@@ -5,7 +5,9 @@
 
 #define SIZE 40
 
+#ifndef TEST
 #define TEST 0 // 1 - dla testow,  0 - dla oceny automatycznej
+#endif
 
 typedef char cbool;
 #define true 1
@@ -224,12 +226,11 @@ double matrix_inv(double A[][SIZE], double B[][SIZE], const int n,
 }
 
 int main(void) {
-
-  double A[SIZE][SIZE], B[SIZE][SIZE], C[SIZE][SIZE];
+  double A[SIZE][SIZE], B[SIZE][SIZE];
   double b[SIZE], x[SIZE], det, eps = 1.e-13;
 
   int to_do;
-  int m, n, p, q;
+  int n;
   if (TEST)
     printf("Wpisz nr zadania ");
   scanf("%d", &to_do);

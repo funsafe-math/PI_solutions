@@ -105,7 +105,7 @@ void char_count(int char_no, int *n_char, int *cnt, FILE *stream) {
 
   // Sort an ix array in decreasing order
   int ixes[LAST_CHAR - FIRST_CHAR];
-  for (int i = 0; i < ARR_LEN(ixes); i++) {
+  for (unsigned int i = 0; i < ARR_LEN(ixes); i++) {
     ixes[i] = i;
   }
   insert_sort(ixes, ARR_LEN(ixes), char_count_predecate, counts);

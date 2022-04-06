@@ -123,7 +123,6 @@ double gauss_simplified(double A[][SIZE], const int n) {
 int main(void) {
 
   double A[SIZE][SIZE], B[SIZE][SIZE], C[SIZE][SIZE];
-  double b[SIZE], x[SIZE], det, eps = 1.e-13;
 
   int to_do;
   int m, n, p, q;
