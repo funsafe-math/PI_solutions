@@ -1,5 +1,5 @@
 extern "C" {
-#define TEST 1
+#define TEST 0
 #include "src/mac_2_template.c"
 }
 #include "tester/tester.h"
