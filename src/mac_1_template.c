@@ -53,7 +53,9 @@ int cmp(const void *first, const void *second) {
 }
 
 // Sortuje alfabetycnie tablice wskaznikow t
-void sortuj_tw(char *t[], const int n) { qsort(t, n, sizeof(t[0]), cmp); }
+void sortuj_tw(char *t[], const int n) {
+  qsort(t, n, sizeof(t[0]), cmp);
+}
 
 // Porzadek alfabetyczny lancuchow zapisanych w tablicy t2D zapisuje w tablicy
 // indx Uwaga: Tablica t2D jest typu const char

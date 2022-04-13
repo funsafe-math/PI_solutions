@@ -122,25 +122,41 @@ typedef int (*obj_bound)(double, double);
 // Koniec zadania 6.5 /////////////////////
 
 // Funkcje matematyczne jednej zmiennej do zadań 6.1 i 6.2
-double f1(double x) { return x; }
+double f1(double x) {
+  return x;
+}
 
-double f2(double x) { return x * x / 2.0; }
+double f2(double x) {
+  return x * x / 2.0;
+}
 
-double f3(double x) { return 1.0 / x; }
+double f3(double x) {
+  return 1.0 / x;
+}
 
-double f4(double x) { return log10(x); }
+double f4(double x) {
+  return log10(x);
+}
 //////////////////////////////////////////////////////////
 
 // Funkcje matematyczne dwóch zmiennych do zadań 6.3 i 6.5
-double f5(double x, double y) { return pow(pow(x, 4) + pow(y, 5), 0.5); }
+double f5(double x, double y) {
+  return pow(pow(x, 4) + pow(y, 5), 0.5);
+}
 
-double f6(double x, double y) { return 8 * sin(x) + pow(5 * cos(y), 2); }
+double f6(double x, double y) {
+  return 8 * sin(x) + pow(5 * cos(y), 2);
+}
 
-double f7(double x, double y) { return 9 * sqrt(x + y) - 2 * sqrt(y); }
+double f7(double x, double y) {
+  return 9 * sqrt(x + y) - 2 * sqrt(y);
+}
 /////////////////////////////////////////////////////
 
 // Funkcje matematyczne trzech zmiennych do zadania 6.4
-double f8(double x, double y, double z) { return x + 3 * y + 5 * z; }
+double f8(double x, double y, double z) {
+  return x + 3 * y + 5 * z;
+}
 
 double f9(double x, double y, double z) {
   return 8 * sin(x) + pow(5 * cos(y), 2) + 2 * z;
@@ -149,11 +165,17 @@ double f9(double x, double y, double z) {
 
 // Funkcje podcałkowe do zadania 6.5 //////////////////
 
-double fb1(double x, double y) { return x * (y * y); }
+double fb1(double x, double y) {
+  return x * (y * y);
+}
 
-double fb2(double x, double y) { return (x * x) + (y * y); }
+double fb2(double x, double y) {
+  return (x * x) + (y * y);
+}
 
-double fb3(double x, double y) { return 1 / (pow(1 - x * x - y * y, 2)); }
+double fb3(double x, double y) {
+  return 1 / (pow(1 - x * x - y * y, 2));
+}
 
 /////////////////////////////////////////////////////
 

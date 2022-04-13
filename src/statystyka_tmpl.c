@@ -22,7 +22,9 @@ void aver_varian(double v[], double *arith_aver, double *varian, int n) {
 }
 
 // Inclusive [a,b]
-int get_rand(int a, int b) { return a + (rand() % (b - a + 1)); }
+int get_rand(int a, int b) {
+  return a + (rand() % (b - a + 1));
+}
 
 // Wypełnianie tablicy wynikiem n prób Bernoulliego
 // 1 - orzeł; 0 - reszka
