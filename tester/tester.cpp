@@ -24,6 +24,8 @@ void fail(const std::string &correct, const std::string &got) {
 }
 
 void trim(std::string &str) {
+  if (str.empty())
+    return; // Nothing to trim if string is empty
   const char whitespace[] = " \n\t";
   auto iswhitespace = [&](char c) {
     for (auto t : whitespace) {
