@@ -74,7 +74,7 @@ void write_string(int write_fd, const std::string_view &message) {
     throw std::runtime_error("Error writing to stdin");
   }
   close(write_fd);
-};
+}
 
 std::string read_string(int read_fd) {
   std::string ret;
@@ -89,9 +89,9 @@ std::string read_string(int read_fd) {
     ret += buffer;
   } while (amnt_read == buffer_size);
   return ret;
-};
+}
 
-}; // namespace
+} // namespace
 
 test::test(const char *example_in, const char *_out) : example_out(_out) {
   int in_read_fd;
