@@ -17,7 +17,7 @@
 // x - rows
 // y - columns
 void copy_mat(const int x, const int y, double *A, const double *B) {
-  size_t items = x * y;
+  size_t items = (size_t)x * y;
   memcpy(A, B, items * sizeof(A[0]));
 }
 
