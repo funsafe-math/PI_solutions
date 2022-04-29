@@ -301,7 +301,7 @@ int main(void) {
     if (TEST)
       printf("Wpisz kolejne linie zawierajace liczby, zakoncz znakiem EOF\n");
     if (TEST == 0) {
-      scanf("%s", file_name);
+      scanf("%49s", file_name);
       stream = fopen(file_name, "r");
       if (stream == NULL) {
         printf("fopen failed\n");
@@ -321,7 +321,7 @@ int main(void) {
       printf("Wpisz kolejne linie zawierajace znaki ASCII, zakoncz znakiem "
              "EOF\n");
     if (TEST == 0) {
-      scanf("%s", file_name);
+      scanf("%49s", file_name);
       stream = fopen(file_name, "r");
       if (stream == NULL) {
         printf("fopen failed\n");

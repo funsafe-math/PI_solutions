@@ -219,7 +219,7 @@ int main(void) {
   if (TEST)
     stream = stdin;
   else {
-    scanf("%s", file_name);
+    scanf("%39s", file_name);
     stream = fopen(file_name, "r");
     if (stream == NULL) {
       printf("fopen failed\n");

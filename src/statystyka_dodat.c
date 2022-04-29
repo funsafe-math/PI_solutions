@@ -71,11 +71,11 @@ void print_histogram(double T[], int n, int starting_from) {
   char l_format[100];
   snprintf(l_format, sizeof(l_format), "%%%dd |", row_n_max_width);
 
-  int left_text_len = sprintf(buf, l_format, 0);
+  int left_text_len = snprintf(buf, sizeof(buf), l_format, 0);
 
   char r_format[] = "  %.1lf%%";
 
-  int right_text_len = sprintf(buf, r_format, max_v);
+  int right_text_len = snprintf(buf, sizeof(buf), r_format, max_v);
 
   const int term_width = 100;
 
