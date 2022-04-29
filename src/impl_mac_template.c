@@ -211,7 +211,7 @@ int read_dbl_lines(line_type lines_tab[], int line_count, FILE *stream) {
     char *begin = line;
     char *end = begin;
     double sum = 0;
-    while (end <= line + line_len) {
+    while (end - line <= line_len) {
       double v = strtod(begin, &end);
       if (v == 0)
         break;
