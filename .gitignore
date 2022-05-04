@@ -1,6 +1,6 @@
 .cache/
 .vscode/
-.ccls/
+.ccls*/
 build/
 zadania/*
 Testing
