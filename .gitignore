@@ -4,3 +4,5 @@
 build/
 zadania/*
 Testing
+CMakeLists.txt.*
+*.json
