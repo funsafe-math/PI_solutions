@@ -43,9 +43,18 @@ void reserve(Vector *vector, size_t new_capacity) {
   vector->capacity = target_capacity;
 }
 
+size_t ptr_diff(void *begin, void *end) {
+  return (size_t)end - (size_t)begin;
+}
+
+void *ptr_add(void *start, size_t offset) {
+  char *s = (char *)start;
+  return s + offset;
+}
+
 Vector_elem at_unsafe(Vector *vector, size_t ix) {
   Vector_elem e;
-  e.data = vector->data + (ix * vector->element_size);
+  e.data = ptr_add(vector->data, ix * vector->element_size);
   e.len = vector->element_size;
   return e;
 }
@@ -56,9 +65,6 @@ Vector_elem at(Vector *vector, size_t ix) {
   return at_unsafe(vector, ix);
 }
 
-size_t ptr_diff(void *begin, void *end) {
-  return (size_t)end - (size_t)begin;
-}
 
 // Resizes the vector to contain new_size elements.
 // If the current size is greater than new_size, the container is
@@ -103,7 +109,7 @@ void insert(Vector *vector, int index, void *value) {
     abort();
   void *new_elem = at_unsafe(vector, index).data;
   void *last_elem = at_unsafe(vector, vector->size).data;
-  memmove(new_elem + vector->element_size, new_elem,
+  memmove(ptr_add(new_elem, +vector->element_size), new_elem,
           ptr_diff(new_elem, last_elem));
   memcpy(new_elem, value, vector->element_size);
   vector->size++;
@@ -114,7 +120,7 @@ void erase(Vector *vector, int index) {
   if ((size_t)index >= vector->size)
     abort();
   void *del_elem = at(vector, index).data;
-  memmove(del_elem, del_elem + vector->element_size,
+  memmove(del_elem, ptr_add(del_elem, vector->element_size),
           (vector->size - 1 - index) * vector->element_size);
 
   vector->size--;
