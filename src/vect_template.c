@@ -43,8 +43,8 @@ void reserve(Vector *vector, size_t new_capacity) {
   vector->capacity = target_capacity;
 }
 
-size_t ptr_diff(void *begin, void *end) {
-  return (size_t)end - (size_t)begin;
+size_t ptr_diff(void *start, void *end) {
+  return (size_t)end - (size_t)start;
 }
 
 void *ptr_add(void *start, size_t offset) {
@@ -64,7 +64,6 @@ Vector_elem at(Vector *vector, size_t ix) {
     abort();
   return at_unsafe(vector, ix);
 }
-
 
 // Resizes the vector to contain new_size elements.
 // If the current size is greater than new_size, the container is
