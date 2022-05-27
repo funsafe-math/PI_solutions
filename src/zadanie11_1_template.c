@@ -325,6 +325,11 @@ DataWord *create_data_word(char *string, int n) {
   return data;
 }
 
+void to_lowercase(char *s) {
+  for (; *s; ++s)
+    *s = tolower(*s);
+}
+
 // dodaje element do uporzadkowanej listy,
 // jezeli element z danym wyrazem juz istnieje, to zwieksza licznik krotnosci
 void insertElem_word(List *list, DataWord *d) {
@@ -333,6 +338,8 @@ void insertElem_word(List *list, DataWord *d) {
     ListElement *fast_ptr = list->head;
     ListElement *lag_ptr = &fakeroot;
     int cmp;
+
+    to_lowercase(d->word);
     while (fast_ptr && ((cmp = list->compareData(d, fast_ptr->data)) > 0)) {
       lag_ptr = fast_ptr;
       fast_ptr = fast_ptr->next;
