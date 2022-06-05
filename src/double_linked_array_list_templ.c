@@ -458,7 +458,8 @@ int main() {
       rewind(stream);
     } else {
       stream = fopen("Tekst_1b.txt", "r");
-      if (stream == NULL)
+      if (stream == NULL &&
+          (stream = fopen("../test_files/Tekst_1b.txt", "r")) == NULL)
         exit(FILE_OPEN_ERROR);
       stream_to_listoftables(&slist, stream);
       fclose(stream);
