@@ -4,7 +4,7 @@ extern "C" {
 }
 #include "tester/tester.h"
 
-test t(R"( 2
+test t(R"(2
 12 2
 i C
 i i
@@ -19,5 +19,5 @@ i W
 r o
 i s
 )",
-       R"( 4
+       R"(4
 l M t)");

@@ -7,5 +7,5 @@ extern "C" {
 test t(R"( 3 xyz
 abcd xyz ab;XYz qwerty
 )",
-       R"( 8
+       R"(8
 xyz 2)");

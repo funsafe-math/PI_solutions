@@ -17,5 +17,5 @@ Do you think knowing Latin would be helpful?
 Just as Latin was the basis of all of those Languages,
 knowing C will enable you to understand and appreciate an entire family of programming languages
 )",
-       R"( 32
+       R"(32
 operating 4)");
